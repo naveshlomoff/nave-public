@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>BruxTrack iOS — Installation Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#ffffff;--bg2:#f8f7ff;--bg3:#f1f0f9;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --text:#1a1828;--text2:#5b5878;--text3:#9895b0;
+  --accent:#7c3aed;--accent2:#5b21b6;--accentlt:#f3f0ff;
+  --hot:#ea580c;--hotlt:#fff7f3;--hotbd:#fed7aa;
+  --green:#059669;--greenlt:#ecfdf5;--greenbd:#a7f3d0;
+  --mono:'DM Mono',monospace;--sans:'Syne',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg2);color:var(--text);font-family:var(--sans);padding:24px 20px 60px;max-width:540px;margin:0 auto}
+h1{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px}
+.sub{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:28px}
+.card{background:var(--bg);border:0.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:10px}
+.section-label{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin:20px 0 8px}
+.step{display:flex;gap:14px;padding:12px 0;border-bottom:0.5px solid var(--border)}
+.step:last-child{border-bottom:none}
+.num{width:30px;height:30px;border-radius:50%;background:var(--accentlt);border:0.5px solid #c4b5fd;font-family:var(--mono);font-size:11px;color:var(--accent2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
+.step-content h3{font-size:14px;font-weight:600;margin-bottom:3px}
+.step-content p{font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.7}
+.step-content code{font-family:var(--mono);font-size:10px;background:var(--bg3);color:var(--accent);padding:1px 5px;border-radius:4px}
+.warn{background:var(--hotlt);border:0.5px solid var(--hotbd);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+.warn p{font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.7}
+.warn b{color:var(--hot)}
+.diff-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;margin-top:8px}
+.diff-table th{background:var(--accent);color:white;padding:7px 10px;text-align:left;font-weight:500;font-size:10px;letter-spacing:.04em}
+.diff-table td{padding:7px 10px;border-bottom:0.5px solid var(--border);color:var(--text2);line-height:1.5}
+.diff-table tr:last-child td{border-bottom:none}
+.diff-table td:first-child{color:var(--text);font-weight:500}
+.ok{color:var(--green)!important}.warn-text{color:var(--hot)!important}
+</style>
+</head>
+<body>
+
+<h1>BruxTrack iOS</h1>
+<div class="sub">Installation guide · iPhone · Safari</div>
+
+<div class="warn">
+  <p><b>iOS is different from Android.</b> Safari does not prompt you to install — you must add to Home Screen manually. Notifications require iOS 16.4 or later. Background audio requires the screen to stay on or Guided Access to be enabled.</p>
+</div>
+
+<div class="section-label">Step 1 — Install from Safari</div>
+<div class="card">
+  <div class="step">
+    <div class="num">1</div>
+    <div class="step-content">
+      <h3>Open in Safari (not Chrome)</h3>
+      <p>BruxTrack must be opened in Safari — PWA installation only works from Safari on iOS. Chrome, Firefox, and other browsers on iPhone use WebKit but cannot install PWAs.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">2</div>
+    <div class="step-content">
+      <h3>Tap the Share button</h3>
+      <p>Tap the <b>Share</b> button (square with arrow pointing up) in the Safari toolbar at the bottom of the screen.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">3</div>
+    <div class="step-content">
+      <h3>Tap "Add to Home Screen"</h3>
+      <p>Scroll down in the Share sheet and tap <code>Add to Home Screen</code>. You can rename it — keep "BruxTrack".</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">4</div>
+    <div class="step-content">
+      <h3>Tap Add</h3>
+      <p>Tap <code>Add</code> in the top-right corner. The app icon appears on your Home Screen. Open it from there — this is what activates standalone PWA mode.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-label">Step 2 — Allow microphone</div>
+<div class="card">
+  <div class="step">
+    <div class="num">A</div>
+    <div class="step-content">
+      <h3>Tap the unlock screen</h3>
+      <p>When you open BruxTrack, you'll see a startup screen. <b>Tap "Open BruxTrack"</b> — this is required on iOS because Safari needs a direct user tap to activate the audio engine.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">B</div>
+    <div class="step-content">
+      <h3>Allow microphone when prompted</h3>
+      <p>Tap the record circle — iOS will ask for microphone permission. Tap <code>Allow</code>. If you accidentally denied it, go to <code>Settings → BruxTrack → Microphone → Allow</code>.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-label">Step 3 — Keep it recording all night</div>
+<div class="card">
+  <div class="step">
+    <div class="num">A</div>
+    <div class="step-content">
+      <h3>Plug in to charge</h3>
+      <p>Recording audio all night uses battery. Keep your iPhone plugged in. This also prevents Low Power Mode from activating and throttling the processor.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">B</div>
+    <div class="step-content">
+      <h3>Enable Guided Access</h3>
+      <p>Go to <code>Settings → Accessibility → Guided Access</code> and turn it on. Then triple-click the side button while in BruxTrack to lock the app in the foreground. This prevents iOS from suspending audio when the screen dims.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">C</div>
+    <div class="step-content">
+      <h3>Increase screen timeout or keep screen on</h3>
+      <p>Go to <code>Settings → Display & Brightness → Auto-Lock</code> and set to <code>Never</code> while recording. Remember to restore it afterwards.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">D</div>
+    <div class="step-content">
+      <h3>Place the phone correctly</h3>
+      <p>Face-down on the mattress 15–30 cm from your head — picks up jaw vibration through the mattress. This is the primary and most sensitive placement.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-label">iOS vs Android differences</div>
+<div class="card" style="padding:0;overflow:hidden">
+  <table class="diff-table">
+    <tr><th>Feature</th><th>iPhone (iOS)</th><th>Samsung (Android)</th></tr>
+    <tr><td>Install</td><td class="warn-text">Manual — Share → Add to Home Screen</td><td class="ok">Prompted automatically</td></tr>
+    <tr><td>Audio unlock</td><td class="warn-text">Required — tap on startup</td><td class="ok">Not needed</td></tr>
+    <tr><td>Background audio</td><td class="warn-text">Screen must stay on</td><td class="ok">Runs in background</td></tr>
+    <tr><td>Notifications</td><td class="warn-text">iOS 16.4+ · standalone only</td><td class="ok">Full support</td></tr>
+    <tr><td>Raw audio clips</td><td class="warn-text">Not saved (Safari limitation)</td><td class="ok">Saved locally</td></tr>
+    <tr><td>Event detection</td><td class="ok">Full support</td><td class="ok">Full support</td></tr>
+    <tr><td>BSI scoring</td><td class="ok">Full support</td><td class="ok">Full support</td></tr>
+    <tr><td>History & report</td><td class="ok">Full support</td><td class="ok">Full support</td></tr>
+    <tr><td>Privacy</td><td class="ok">100% on-device</td><td class="ok">100% on-device</td></tr>
+  </table>
+</div>
+
+<div class="section-label">Notifications (iOS 16.4+ only)</div>
+<div class="card">
+  <div class="step">
+    <div class="num">!</div>
+    <div class="step-content">
+      <h3>Notifications require the installed PWA</h3>
+      <p>Web push notifications on iOS only work when the app is installed via Add to Home Screen <b>and</b> you are on iOS 16.4 or later. Open the installed app, go to Settings, and tap "Enable Notifications" once you've completed the install steps.</p>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:28px 0;font-family:var(--mono);font-size:10px;color:var(--text3);line-height:2">
+  BruxTrack iOS · Phase 1 · v0.1.0<br>
+  All data stays on your iPhone · no cloud · no tracking
+</div>
+
+</body>
+</html>
