@@ -234,6 +234,14 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px;
 .tip-box { background: var(--accentlt); border: 0.5px solid #c4b5fd; border-radius: var(--r); padding: 11px 13px; margin-bottom: 10px; font-family: var(--mono); font-size: 10px; color: var(--text2); line-height: 1.65; }
 .tip-box b { color: var(--accent2); font-weight: 500; }
 </style>
+<script>
+// iOS: unlock AudioContext on first user touch
+document.addEventListener('touchstart', function iosUnlock() {
+  const ctx = new (window.AudioContext||window.webkitAudioContext)();
+  ctx.resume().then(() => ctx.close());
+  document.removeEventListener('touchstart', iosUnlock);
+}, {once: true});
+</script>
 </head>
 <body>
 <div id="app">
@@ -412,7 +420,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px;
           <div class="label" style="margin-bottom:0">Detection sensitivity</div>
           <div style="font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500" id="sens-val">65</div>
         </div>
-        <input type="range" min="20" max="95" value="55" id="sensitivity" step="1" oninput="document.getElementById('sens-val').textContent=this.value">
+        <input type="range" min="20" max="95" value="45" id="sensitivity" step="1" oninput="document.getElementById('sens-val').textContent=this.value">
         <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;color:var(--text3);margin-top:5px"><span>fewer events</span><span>catch everything</span></div>
       </div>
 
@@ -468,7 +476,7 @@ const state = {
   animFrame: null, timerInterval: null,
   inEvent: false, eventStart: 0, silenceFrames: 0, eventFrames: 0,
   waveformData: new Float32Array(256), freqData: new Uint8Array(2048),
-  settings: { filterSnore:true, filterImpact:true, filterSpeech:true, saveClips:true, sensitivity:55, placement:'pillow', reportTime:'07:00' }
+  settings: { filterSnore:true, filterImpact:true, filterSpeech:true, saveClips:true, sensitivity:45, placement:'pillow', reportTime:'07:00' }
 };
 
 let db;
@@ -507,12 +515,16 @@ async function toggleRecording() {
 
 async function startRecording() {
   try {
-    state.mediaStream = await navigator.mediaDevices.getUserMedia({audio:{sampleRate:44100,channelCount:1,echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    state.mediaStream = await navigator.mediaDevices.getUserMedia({audio:{channelCount:1,echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
   } catch(e) { toast('Microphone access denied — check browser permissions.'); return; }
-  state.audioCtx = new (window.AudioContext||window.webkitAudioContext)({sampleRate:44100});
+  state.audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  // iOS Safari REQUIRES resume() after user gesture — without this peak=0 always
+  if(state.audioCtx.state === 'suspended') {
+    await state.audioCtx.resume();
+  }
   const source = state.audioCtx.createMediaStreamSource(state.mediaStream);
   state.analyser = state.audioCtx.createAnalyser();
-  state.analyser.fftSize = 4096;
+  state.analyser.fftSize = 2048;
   state.analyser.smoothingTimeConstant = 0.8;
   source.connect(state.analyser);
   state.freqData = new Uint8Array(state.analyser.frequencyBinCount);
